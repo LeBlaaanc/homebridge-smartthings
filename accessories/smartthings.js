@@ -294,26 +294,29 @@ function SmartThingsAccessory(platform, device) {
  		that.platform.addAttributeUsage("presence", this.deviceid, thisCharacteristic);
     }
 
-    if (device.capabilities["Relative Humidity Measurement"] !== undefined) {
-        if (this.deviceGroup == 'unknown') this.deviceGroup = "sensor";
-        thisCharacteristic = this.getaddService(Service.HumiditySensor).getCharacteristic(Characteristic.CurrentRelativeHumidity)
-        thisCharacteristic.on('get', function(callback) { callback(null, Math.round(that.device.attributes.humidity)); });
-		that.platform.addAttributeUsage("humidity", this.deviceid, thisCharacteristic);
-    }
+  //   if (device.capabilities["Relative Humidity Measurement"] !== undefined && 
+  //       device.capabilities["Thermostat"] === undefined
+  //   ) {
+  //       if (this.deviceGroup == 'unknown') this.deviceGroup = "sensor";
+  //       thisCharacteristic = this.getaddService(Service.HumiditySensor).getCharacteristic(Characteristic.CurrentRelativeHumidity)
+  //       thisCharacteristic.on('get', function(callback) { callback(null, Math.round(that.device.attributes.humidity)); });
+		// that.platform.addAttributeUsage("humidity", this.deviceid, thisCharacteristic);
+  //   }
 
-    if (device.capabilities["Temperature Measurement"] !== undefined) {
-        if (this.deviceGroup == 'unknown') this.deviceGroup = "sensor";
-        thisCharacteristic = this.getaddService(Service.TemperatureSensor).getCharacteristic(Characteristic.CurrentTemperature)
-        thisCharacteristic.on('get', function(callback) {
-                if (that.platform.temperature_unit == 'C')
-                    callback(null, Math.round(that.device.attributes.temperature*10)/10);
-                else
-                    callback(null, Math.round(((that.device.attributes.temperature - 32) / 1.8)*10)/10);
-            });
-		that.platform.addAttributeUsage("temperature", this.deviceid, thisCharacteristic);
-    }
+  //   if (device.capabilities["Temperature Measurement"] !== undefined && 
+  //       device.capabilities["Thermostat"] === undefined
+  //   ) {
+  //       if (this.deviceGroup == 'unknown') this.deviceGroup = "sensor";
+  //       thisCharacteristic = this.getaddService(Service.TemperatureSensor).getCharacteristic(Characteristic.CurrentTemperature)
+  //       thisCharacteristic.on('get', function(callback) {
+  //               if (that.platform.temperature_unit == 'C')
+  //                   callback(null, Math.round(that.device.attributes.temperature*10)/10);
+  //               else
+  //                   callback(null, Math.round(((that.device.attributes.temperature - 32) / 1.8)*10)/10);
+  //           });
+		// that.platform.addAttributeUsage("temperature", this.deviceid, thisCharacteristic);
+  //   }
 
-    if (device.capabilities["Contact Sensor"] !== undefined) {
         if (this.deviceGroup == 'unknown') this.deviceGroup = "sensor";
         thisCharacteristic = this.getaddService(Service.ContactSensor).getCharacteristic(Characteristic.ContactSensorState)
         thisCharacteristic.on('get', function(callback) {
